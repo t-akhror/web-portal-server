@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const userRoutes=require('./routes/user')
 
 dotenv.config();
- port=process.env.PORT ;
 // express app
 const app=express();
 
@@ -17,15 +16,15 @@ app.use((req,res,next)=>{
 })
 
 // routes
-app.use('api/user',userRoutes)
+app.use('/api/users',userRoutes)
 
 // connection DB
-mongoose.set('strictQuery',true)
-mongoose.connect('mongodb+srv://akhror:q1w2e3r4@reviews.hz750kl.mongodb.net/?retryWrites=true&w=majority')
+mongoose.set('strictQuery',false)
+mongoose.connect(process.env.MONGO_URI)
 .then(()=>{
 // listen request
-app.listen(port,()=>{
-    console.log('connected DB and listening port ',port)
+app.listen(process.env.PORT,()=>{
+    console.log('connected DB and listening port ',process.env.PORT)
 })
 })
 .catch((error)=>{
