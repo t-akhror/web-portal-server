@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
+const reviewRoutes = require("./routes/reviews");
 
 dotenv.config();
 // express app
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// delete this body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // set cors
@@ -30,6 +32,7 @@ app.use(cors());
 
 // routes
 app.use("/api/users", userRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 // connection DB
 mongoose.set("strictQuery", false);
