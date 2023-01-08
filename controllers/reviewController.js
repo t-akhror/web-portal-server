@@ -8,6 +8,10 @@ const getAllReviews = async (req, res) => {
 
   res.status(200).json(reviews);
 };
+const someReviews = async (req, res) => {
+  const someReviews = await Review.find({}).sort({ createdAt: -1 });
+  res.status(200).json(someReviews);
+};
 
 // GET a single review
 const getReview = async (req, res) => {
@@ -81,4 +85,5 @@ module.exports = {
   getReview,
   deleteReview,
   updateReview,
+  someReviews,
 };

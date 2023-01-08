@@ -5,11 +5,13 @@ const {
   getReview,
   deleteReview,
   updateReview,
+  someReviews,
 } = require("../controllers/reviewController");
 const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 // require Auth for all reviews
+router.get("/allreviews", someReviews);
 router.use(requireAuth);
 // GET all reviews
 router.get("/", getAllReviews);
