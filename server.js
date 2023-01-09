@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // set cors
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://reviews-app.onrender.com",
   credentials: true,
   // accessControlAllowCredentials:true,
   optionSuccessStatus: 200,
