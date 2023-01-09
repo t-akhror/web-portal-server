@@ -38,7 +38,9 @@ app.use("/api/reviews", reviewRoutes);
 // connection DB
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(
+    "mongodb+srv://akhror:q1w2e3r4@reviews.hz750kl.mongodb.net/?retryWrites=true&w=majority"
+  )
   .then(() => {
     // listen request
     app.listen(process.env.PORT, () => {
