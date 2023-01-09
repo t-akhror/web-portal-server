@@ -38,13 +38,11 @@ app.use("/api/reviews", reviewRoutes);
 // connection DB
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(
-    "mongodb+srv://akhror:q1w2e3r4@reviews.hz750kl.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => {
     // listen request
-    app.listen("1235", () => {
-      console.log("connected DB and listening port 1235");
+    app.listen(process.env.PORT, () => {
+      console.log("connected DB and listening port ", process.env.PORT);
     });
   })
   .catch((error) => {
