@@ -5,9 +5,12 @@ const {
   loginUser,
   signupUser,
   user_detail,
+  getAllUsers,
 } = require("../controllers/userController");
 
 const router = express.Router();
+// get all users
+router.get("/", getAllUsers);
 // Login route
 router.post("/login", loginUser);
 
@@ -15,6 +18,6 @@ router.post("/login", loginUser);
 router.post("/signup", signupUser);
 
 // Find user by email
-router.get("/find", user_detail);
+router.post("/find", user_detail);
 
 module.exports = router;

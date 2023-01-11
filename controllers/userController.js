@@ -11,6 +11,12 @@ const user_detail = async (req, res) => {
   res.status(200).json(exist);
 };
 
+// GET all user
+const getAllUsers = async (req, res) => {
+  const reviews = await User.find().sort({ createdAt: -1 });
+
+  res.status(200).json(reviews);
+};
 // login user
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -47,4 +53,4 @@ const signupUser = async (req, res) => {
   }
 };
 
-module.exports = { loginUser, signupUser, user_detail };
+module.exports = { loginUser, signupUser, user_detail, getAllUsers };
