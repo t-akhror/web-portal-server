@@ -1,5 +1,7 @@
+const { json } = require("express");
 const { mongoose } = require("mongoose");
 const Review = require("../models/reviewModel");
+const User = require("../models/userModel");
 
 // GET all reviews
 const getAllReviews = async (req, res) => {
@@ -9,7 +11,9 @@ const getAllReviews = async (req, res) => {
   res.status(200).json(reviews);
 };
 const someReviews = async (req, res) => {
-  const someReviews = await Review.find({}).sort({ createdAt: -1 });
+  const someReviews = await Review.find()
+    .populate("user")
+    .sort({ createdAt: -1 });
   res.status(200).json(someReviews);
 };
 
@@ -20,7 +24,7 @@ const getReview = async (req, res) => {
     return res.status(404).json({ error: "Not such review" });
   }
 
-  const review = await Review.findById(id);
+  const review = await Review.findById(id).populate("user");
 
   if (!review) {
     return res.status(404).json({ error: "Not such review" });
@@ -32,8 +36,17 @@ const getReview = async (req, res) => {
 // POST a new review
 const createReview = async (req, res) => {
   const user_id = req.user._id;
-  const { title, image, brand, category, description, rating, numOfReviews } =
-    req.body;
+  const {
+    title,
+    image,
+    brand,
+    category,
+    description,
+    rating,
+    numOfReviews,
+    user,
+  } = req.body;
+
   try {
     const review = await Review.create({
       title,
@@ -43,7 +56,7 @@ const createReview = async (req, res) => {
       description,
       rating,
       numOfReviews,
-      user_id,
+      user,
     });
     res.status(200).json(review);
   } catch (error) {

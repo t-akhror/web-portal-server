@@ -18,11 +18,11 @@ const commentSchema = mongoose.Schema(
 
 const reviewSchema = mongoose.Schema(
   {
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    //   ref: "User",
-    // },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
 
     title: {
       type: String,
@@ -55,10 +55,10 @@ const reviewSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    user_id: {
-      type: String,
-      required: true,
-    },
+    // user_id: {
+    //   type: String,
+    //   required: true,
+    // },
   },
   {
     timestamps: true,

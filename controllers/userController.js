@@ -4,6 +4,12 @@ const jwt = require("jsonwebtoken");
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRERT_KEY, { expiresIn: "2d" });
 };
+// Get user data
+const user_detail = async (req, res) => {
+  const { email } = req.body;
+  const exist = await User.findOne({ email });
+  res.status(200).json(exist);
+};
 
 // login user
 const loginUser = async (req, res) => {
@@ -22,7 +28,7 @@ const loginUser = async (req, res) => {
 const signupUser = async (req, res) => {
   console.log("Registering user ");
   const { email, firstname, lastname, dateOfBirth, password } = req.body;
-  console.log("some error with body", dateOfBirth);
+
   try {
     const user = await User.signup(
       email,
@@ -41,4 +47,4 @@ const signupUser = async (req, res) => {
   }
 };
 
-module.exports = { loginUser, signupUser };
+module.exports = { loginUser, signupUser, user_detail };
