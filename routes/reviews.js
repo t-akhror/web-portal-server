@@ -8,6 +8,7 @@ const {
   someReviews,
 } = require("../controllers/reviewController");
 const requireAuth = require("../middleware/requireAuth");
+const upload = require("../middleware/upload");
 
 const router = express.Router();
 // require Auth for all reviews
@@ -20,7 +21,7 @@ router.get("/", getAllReviews);
 router.get("/:id", getReview);
 
 // POST a new review
-router.post("/", createReview);
+router.post("/", upload.single("reviewImage"), createReview);
 
 // DELETE a review
 router.delete("/:id", deleteReview);

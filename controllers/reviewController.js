@@ -36,21 +36,14 @@ const getReview = async (req, res) => {
 // POST a new review
 const createReview = async (req, res) => {
   const user_id = req.user._id;
-  const {
-    title,
-    image,
-    brand,
-    category,
-    description,
-    rating,
-    numOfReviews,
-    user,
-  } = req.body;
-
+  const { title, brand, category, description, rating, numOfReviews, user } =
+    req.body;
+  const reviewImage = req.file.path;
+  console.log(reviewImage);
   try {
     const review = await Review.create({
       title,
-      image,
+      reviewImage,
       brand,
       category,
       description,

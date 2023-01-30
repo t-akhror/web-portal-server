@@ -22,6 +22,9 @@ app.use((req, res, next) => {
 // delete this body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// access to uploads folder
+app.use("/uploads", express.static("uploads"));
+
 // set cors
 const corsOptions = {
   origin: "https://reviews-app.onrender.com",

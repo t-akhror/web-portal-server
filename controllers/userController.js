@@ -14,7 +14,6 @@ const user_detail = async (req, res) => {
 // GET all user
 const getAllUsers = async (req, res) => {
   const reviews = await User.find().sort({ createdAt: -1 });
-
   res.status(200).json(reviews);
 };
 // login user
