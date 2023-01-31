@@ -3,13 +3,18 @@ const { mongoose } = require("mongoose");
 const Review = require("../models/reviewModel");
 const User = require("../models/userModel");
 
-// GET all reviews
+// GET all reviews belong to a User
 const getAllReviews = async (req, res) => {
   const user_id = req.user._id;
-  const reviews = await Review.find({ user_id }).sort({ createdAt: -1 });
-
+  const reviews = await Review.find({ user: user_id }).sort({
+    createdAt: -1,
+  });
+  if (!review) {
+    return res.status(404).json({ error: "There is not any reviews" });
+  }
   res.status(200).json(reviews);
 };
+// GET all reviews
 const someReviews = async (req, res) => {
   const someReviews = await Review.find()
     .populate("user")
@@ -39,7 +44,7 @@ const createReview = async (req, res) => {
   const { title, brand, category, description, rating, numOfReviews, user } =
     req.body;
   const reviewImage = req.file.path;
-  console.log(reviewImage);
+
   try {
     const review = await Review.create({
       title,

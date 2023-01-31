@@ -13,8 +13,9 @@ const upload = require("../middleware/upload");
 const router = express.Router();
 // require Auth for all reviews
 router.get("/allreviews", someReviews);
+
 router.use(requireAuth);
-// GET all reviews
+// GET all reviews for Authenticated user
 router.get("/", getAllReviews);
 
 // GET a single review
