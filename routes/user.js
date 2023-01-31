@@ -18,6 +18,6 @@ router.post("/login", loginUser);
 router.post("/signup", signupUser);
 
 // Find user by email
-router.post("/find", user_detail);
+router.get("/find", user_detail);
 
 module.exports = router;

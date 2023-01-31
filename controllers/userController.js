@@ -7,6 +7,7 @@ const createToken = (_id) => {
 // Get user data
 const user_detail = async (req, res) => {
   const { email } = req.body;
+  console.log(email);
   const exist = await User.findOne({ email });
   res.status(200).json(exist);
 };
@@ -23,7 +24,8 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
-    res.status(200).json({ email, token });
+
+    res.status(200).json({ email, token, user });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
