@@ -9,7 +9,7 @@ const getAllReviews = async (req, res) => {
   const reviews = await Review.find({ user: user_id }).sort({
     createdAt: -1,
   });
-  if (!review) {
+  if (!reviews) {
     return res.status(404).json({ error: "There is not any reviews" });
   }
   res.status(200).json(reviews);
