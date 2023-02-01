@@ -6,7 +6,8 @@ const User = require("../models/userModel");
 // GET all reviews belong to a User
 const getAllReviews = async (req, res) => {
   const user_id = req.user._id;
-  const q = req.query;
+  const { q } = req.query;
+
   const reviews = await Review.find({ user: user_id }).sort({
     createdAt: -1,
   });
@@ -17,10 +18,10 @@ const getAllReviews = async (req, res) => {
   const keys = ["title", "category", "description"];
   const search = (data) => {
     return data.filter((item) =>
-      keys.some((key) => item[key].toLowerCase().includes(query))
+      keys.some((key) => item[key].toLowerCase().includes(q))
     );
   };
-  res.status(200).json(search(reviews)).splice(0, 10);
+  res.status(200).json(search(reviews));
 };
 // GET all reviews
 const someReviews = async (req, res) => {
