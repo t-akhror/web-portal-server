@@ -6,13 +6,21 @@ const User = require("../models/userModel");
 // GET all reviews belong to a User
 const getAllReviews = async (req, res) => {
   const user_id = req.user._id;
+  const q = req.query;
   const reviews = await Review.find({ user: user_id }).sort({
     createdAt: -1,
   });
   if (!reviews) {
     return res.status(404).json({ error: "There is not any reviews" });
   }
-  res.status(200).json(reviews);
+  // filter function
+  const keys = ["title", "category", "description"];
+  const search = (data) => {
+    return data.filter((item) =>
+      keys.some((key) => item[key].toLowerCase().includes(query))
+    );
+  };
+  res.status(200).json(search(reviews)).splice(0, 10);
 };
 // GET all reviews
 const someReviews = async (req, res) => {
